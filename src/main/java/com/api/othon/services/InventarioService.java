@@ -50,4 +50,7 @@ public class InventarioService {
     public void deletar(Long id) {
         inventarioRepository.deleteById(id);
     }
+    public List<Inventario> buscarPorNome(String nome) {
+        return inventarioRepository.findByInventarioNomeProdutoContainingIgnoreCase(nome);
+    }
 }

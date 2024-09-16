@@ -21,7 +21,12 @@ public class ClienteController {
     public ResponseEntity<List<Cliente>> listarTodos() {
         return ResponseEntity.ok(clienteService.listarTodos());
     }
-
+    @GetMapping("/buscar")
+    public ResponseEntity<Cliente> buscarPorNome(@RequestParam String nome) {
+        return clienteService.buscarPorNome(nome)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
     // Endpoint para buscar um cliente pelo ID
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
@@ -31,7 +36,7 @@ public class ClienteController {
     }
 
     // Endpoint para criar um novo cliente
-    @PostMapping
+    @PostMapping("/CriarCli")
     public ResponseEntity<Cliente> criar(@RequestBody Cliente cliente) {
         Cliente novoCliente = clienteService.salvar(cliente);
         return ResponseEntity.ok(novoCliente);

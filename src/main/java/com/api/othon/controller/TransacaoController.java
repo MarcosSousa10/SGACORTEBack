@@ -3,6 +3,7 @@ package com.api.othon.controller;
 import com.api.othon.model.Transacao;
 import com.api.othon.services.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,9 +33,17 @@ public class TransacaoController {
     }
 
     @PostMapping
-    public Transacao criar(@RequestBody Transacao transacao) {
-        return transacaoService.salvar(transacao);
+    public ResponseEntity<?> criars(@RequestBody Transacao transacao) {
+        try {
+            Transacao transacaoSalva = transacaoService.salvar(transacao);
+            return ResponseEntity.ok("Transação efetuada com sucesso: ");
+        } catch (Exception e) {
+            // Log do erro se necessário
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Erro ao processar a transação: " + e.getMessage());
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Transacao> atualizar(@PathVariable Long id, @RequestBody Transacao transacaoAtualizada) {

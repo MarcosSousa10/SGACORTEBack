@@ -16,7 +16,7 @@ public class Filial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "filial_id")
-    private Long ;
+    private Long filialId;
 
     @Column(nullable = false, length = 100)
     private String nome; // Nome da filial

@@ -1,5 +1,6 @@
 package com.api.othon.controller;
 
+import com.api.othon.model.Agendamento;
 import com.api.othon.model.Inventario;
 import com.api.othon.services.InventarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,14 @@ public class InventarioController {
     public Inventario criar(@RequestBody Inventario inventario) {
         return inventarioService.salvar(inventario);
     }
-
+    @GetMapping("/BuscarPorNome")
+    public ResponseEntity<List<Inventario>> buscarPorNomeCliente(@RequestParam String nome) {
+        List<Inventario> Inventario = inventarioService.buscarPorNome(nome);
+        if (Inventario.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(Inventario);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<Inventario> atualizar(@PathVariable Long id, @RequestBody Inventario inventarioAtualizado) {
         try {

@@ -1,6 +1,7 @@
 package com.api.othon.services;
 
 import com.api.othon.model.Agendamento;
+import com.api.othon.model.Agendamento.Status;
 import com.api.othon.model.repository.AgendamentoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,14 @@ public class AgendamentoService {
     public Optional<Agendamento> buscarPorId(Long id) {
         return agendamentoRepository.findById(id);
     }
-
+    public Agendamento atualizarStatus(Agendamento agendamentoAtualizado) {
+        return agendamentoRepository.save(agendamentoAtualizado);
+    }
+    
+    public Agendamento buscarPorIdStatus(Long id) {
+        return agendamentoRepository.findById(id).orElse(null);
+    }
+    
     public Agendamento salvar(Agendamento agendamento) {
         return agendamentoRepository.save(agendamento);
     }
@@ -50,5 +58,11 @@ public class AgendamentoService {
 
     public void deletar(Long id) {
         agendamentoRepository.deleteById(id);
+    }
+    public List<Agendamento> buscarPorNomeCliente(String nome) {
+        return agendamentoRepository.findByClienteNomeContainingIgnoreCase(nome);
+    }
+    public List<Agendamento> listarAgendados() {
+        return agendamentoRepository.findByStatus(Status.AGENDADO);
     }
 }

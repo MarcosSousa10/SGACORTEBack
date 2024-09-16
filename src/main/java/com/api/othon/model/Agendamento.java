@@ -68,7 +68,6 @@ public class Agendamento implements Serializable {
     @JoinColumn(name = "filial_id", nullable = false)
     private Filial filial;
 
-    // Enum para status do agendamento
     public enum Status {
         AGENDADO, CONCLUIDO, CANCELADO
     }
@@ -82,4 +81,6 @@ public class Agendamento implements Serializable {
     protected void onUpdate() {
         updatedAt = new java.util.Date();
     }
+
+    
 }

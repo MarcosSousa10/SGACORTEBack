@@ -30,7 +30,11 @@ public class ProfissionalController {
         Optional<Profissional> profissional = profissionalService.buscarPorId(id);
         return profissional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<Profissional> buscarPorNome(@PathVariable String nome) {
+        Optional<Profissional> profissional = profissionalService.buscarPorNome(nome);
+        return profissional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
     @PostMapping
     public Profissional criar(@RequestBody Profissional profissional) {
         return profissionalService.salvar(profissional);

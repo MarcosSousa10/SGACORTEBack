@@ -50,4 +50,7 @@ public class ClienteService {
     public void deletar(Long id) {
         clienteRepository.deleteById(id);
     }
+    public Optional<Cliente> buscarPorNome(String nome) {
+        return clienteRepository.findByNome(nome);
+    }
 }

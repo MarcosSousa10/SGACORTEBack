@@ -18,7 +18,9 @@ public class ProfissionalService {
     public ProfissionalService(ProfissionalRepository profissionalRepository) {
         this.profissionalRepository = profissionalRepository;
     }
-
+    public Optional<Profissional> buscarPorNome(String nome) {
+        return profissionalRepository.findByNome(nome);
+    }
     public List<Profissional> listarTodos() {
         return profissionalRepository.findAll();
     }

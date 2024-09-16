@@ -1,6 +1,7 @@
 package com.api.othon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,22 +23,35 @@ public class ComissaoController {
         return ResponseEntity.ok(comissaoService.listarTodas());
     }
 
-    // Buscar uma comissão pelo ID
+    @GetMapping("/profissional/{profissionalId}")
+    public ResponseEntity<List<Comissao>> buscarPorProfissionalId(@PathVariable Long profissionalId) {
+        List<Comissao> comissoes = comissaoService.buscarPorProfissionalId(profissionalId);
+        if (comissoes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(comissoes);
+    }
+    
     @GetMapping("/{id}")
     public ResponseEntity<Comissao> buscarPorId(@PathVariable Long id) {
         return comissaoService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    // Criar uma nova comissão
     @PostMapping
-    public ResponseEntity<Comissao> criar(@RequestBody Comissao comissao) {
-        Comissao novaComissao = comissaoService.salvar(comissao);
-        return ResponseEntity.ok(novaComissao);
+    public ResponseEntity<?> criar(@RequestBody Comissao comissao) {
+        try {
+            System.out.println(comissao.toString());
+
+            Comissao novaComissao = comissaoService.salvar(comissao);
+            return ResponseEntity.ok("Comissão criada com sucesso");
+        } catch (Exception e) {
+            // Log do erro se necessário
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao processar a comissão: " + e.getMessage());
+        }
     }
 
-    // Atualizar uma comissão existente
     @PutMapping("/{id}")
     public ResponseEntity<Comissao> atualizar(@PathVariable Long id, @RequestBody Comissao comissaoAtualizada) {
         Comissao comissao = comissaoService.atualizar(id, comissaoAtualizada);

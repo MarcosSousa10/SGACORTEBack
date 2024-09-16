@@ -28,10 +28,13 @@ public class ComissaoService {
         return comissaoRepository.findById(id);
     }
 
+    public List<Comissao> buscarPorProfissionalId(Long profissionalId) {
+        return comissaoRepository.findByProfissionalId(profissionalId);
+    }
+
     // Método para calcular e salvar uma nova comissão
     public Comissao salvar(Comissao comissao) {
-        // Cálculo do valor da comissão baseado na taxa de comissão
-        comissao.setValorComissao(calcularValorComissao(comissao.getTaxaComissao()));
+        comissao.setValorComissao(calcularValorComissao(comissao.getTaxaComissao(),comissao.getValorComissao()));
         return comissaoRepository.save(comissao);
     }
 
@@ -48,16 +51,16 @@ public class ComissaoService {
         comissaoExistente.setProfissionalId(comissaoAtualizada.getProfissionalId());
         comissaoExistente.setAgendamentoId(comissaoAtualizada.getAgendamentoId());
         comissaoExistente.setTaxaComissao(comissaoAtualizada.getTaxaComissao());
-        comissaoExistente.setValorComissao(calcularValorComissao(comissaoAtualizada.getTaxaComissao()));
+        comissaoExistente.setValorComissao(calcularValorComissao(comissaoAtualizada.getTaxaComissao(),comissaoAtualizada.getValorComissao()));
         comissaoExistente.setUpdatedAt(LocalDateTime.now());
 
         return comissaoRepository.save(comissaoExistente);
     }
 
     // Método para calcular o valor da comissão
-    private BigDecimal calcularValorComissao(BigDecimal taxaComissao) {
+    private BigDecimal calcularValorComissao(BigDecimal taxaComissao,BigDecimal precoServico) {
         // Exemplo de cálculo (isso precisaria ser ajustado com base nos dados reais)
-        BigDecimal precoServico = new BigDecimal("100.00"); // Este valor deve ser ajustado conforme necessário
+      //  BigDecimal precoServico = new BigDecimal("100.00"); // Este valor deve ser ajustado conforme necessário
         return precoServico.multiply(taxaComissao).divide(new BigDecimal("100"));
     }
 }
