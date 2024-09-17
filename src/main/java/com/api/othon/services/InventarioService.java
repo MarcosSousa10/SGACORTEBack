@@ -53,4 +53,16 @@ public class InventarioService {
     public List<Inventario> buscarPorNome(String nome) {
         return inventarioRepository.findByInventarioNomeProdutoContainingIgnoreCase(nome);
     }
+    public boolean reduzirQuantidade(Long id, int quantidade) {
+        Optional<Inventario> inventarioOpt = inventarioRepository.findById(id);
+        if (inventarioOpt.isPresent()) {
+            Inventario inventario = inventarioOpt.get();
+            if (inventario.getQuantidade() >= quantidade) {
+                inventario.setQuantidade(inventario.getQuantidade() - quantidade);
+                inventarioRepository.save(inventario);
+                return true;
+            }
+        }
+        return false;
+    }
 }

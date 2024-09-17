@@ -1,5 +1,6 @@
 package com.api.othon.controller;
 
+import com.api.othon.model.ComunicacaoCliente;
 import com.api.othon.model.ConfiguracaoDoSistema;
 import com.api.othon.services.ConfiguracaoDoSistemaService;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +23,11 @@ public class ConfiguracaoDoSistemaController {
         ConfiguracaoDoSistema savedConfig = service.save(configuracao);
         return ResponseEntity.ok(savedConfig);
     }
-
+    @GetMapping
+    public ResponseEntity<List<ConfiguracaoDoSistema>> testList() {
+        List<ConfiguracaoDoSistema> configs = service.listarTodos();
+        return ResponseEntity.ok(configs);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<ConfiguracaoDoSistema> getById(@PathVariable Long id) {
         Optional<ConfiguracaoDoSistema> configuracao = service.findById(id);

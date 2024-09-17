@@ -1,11 +1,13 @@
 package com.api.othon.controller;
 
+import com.api.othon.model.AvaliacaoDeServico;
 import com.api.othon.model.DesempenhoDosFuncionarios;
 import com.api.othon.services.DesempenhoDosFuncionariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,7 +28,10 @@ public class DesempenhoDosFuncionariosController {
         Optional<DesempenhoDosFuncionarios> desempenho = service.findById(id);
         return desempenho.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
+    @GetMapping
+    public List<DesempenhoDosFuncionarios> listarTodos() {
+        return service.listarTodos();
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (!service.findById(id).isPresent()) {

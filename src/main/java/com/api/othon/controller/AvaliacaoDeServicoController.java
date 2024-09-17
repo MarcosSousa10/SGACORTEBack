@@ -1,12 +1,14 @@
 package com.api.othon.controller;
 
 import com.api.othon.model.AvaliacaoDeServico;
+import com.api.othon.model.CampanhaDeMarketing;
 import com.api.othon.services.AvaliacaoDeServicoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +23,10 @@ public class AvaliacaoDeServicoController {
         AvaliacaoDeServico savedAvaliacao = service.save(avaliacao);
         return ResponseEntity.ok(savedAvaliacao);
     }
-
+    @GetMapping
+    public List<AvaliacaoDeServico> listarTodos() {
+        return service.listarTodos();
+    }
     @GetMapping("/{id}")
     public ResponseEntity<AvaliacaoDeServico> getById(@PathVariable Long id) {
         Optional<AvaliacaoDeServico> avaliacao = service.findById(id);

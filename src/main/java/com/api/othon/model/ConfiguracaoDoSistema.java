@@ -26,7 +26,7 @@ public class ConfiguracaoDoSistema implements Serializable {
     @Column(name = "descricao", columnDefinition = "TEXT")
     private String descricao;
 
-    @Column(name = "ultima_atualizacao", nullable = false, updatable = false, insertable = false)
+    @Column(name = "ultima_atualizacao", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp ultimaAtualizacao;
 

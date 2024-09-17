@@ -1,11 +1,13 @@
 package com.api.othon.services;
 
+import com.api.othon.model.ComunicacaoCliente;
 import com.api.othon.model.ConfiguracaoDoSistema;
 import com.api.othon.model.repository.ConfiguracaoDoSistemaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +18,10 @@ public class ConfiguracaoDoSistemaService {
 
     public ConfiguracaoDoSistema save(ConfiguracaoDoSistema configuracao) {
         return repository.save(configuracao);
+    }
+
+    public List<ConfiguracaoDoSistema> listarTodos() {
+        return repository.findAll();
     }
 
     public Optional<ConfiguracaoDoSistema> findById(Long id) {

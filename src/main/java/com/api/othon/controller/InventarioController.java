@@ -59,4 +59,19 @@ public class InventarioController {
         inventarioService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+    @PostMapping("/{id}/reduzirQuantidade")
+    public ResponseEntity<String> reduzirQuantidade(
+            @PathVariable Long id,
+            @RequestBody QuantidadeDTO quantidadeDTO) {
+        try {
+            boolean sucesso = inventarioService.reduzirQuantidade(id, quantidadeDTO.getQuantidade());
+            if (sucesso) {
+                return ResponseEntity.ok("Quantidade reduzida com sucesso.");
+            } else {
+                return ResponseEntity.status(400).body("Não há itens suficientes no estoque.");
+            }
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
