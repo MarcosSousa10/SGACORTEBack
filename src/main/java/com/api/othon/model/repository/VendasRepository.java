@@ -1,9 +1,16 @@
 package com.api.othon.model.repository;
 
-import com.api.othon.model.Vendas;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
+import com.api.othon.model.Vendas;
+
+import java.time.LocalDate;
+import java.util.List;
+
 public interface VendasRepository extends JpaRepository<Vendas, Long> {
+
+    @Query("SELECT v FROM Vendas v WHERE DATE(v.dataVenda) = DATE(:today)")
+    List<Vendas> findVendasByDataVenda(@Param("today") LocalDate today);
 }

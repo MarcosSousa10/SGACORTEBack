@@ -6,6 +6,7 @@ import com.api.othon.model.repository.VendasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +40,13 @@ public class VendasService {
             throw new RuntimeException("Venda não encontrada");
         }
     }
+
     public List<Vendas> listarTodos() {
         return vendasRepository.findAll();
     }
 
+    public List<Vendas> listarVendasDoDia() {
+        LocalDate today = LocalDate.now();
+        return vendasRepository.findVendasByDataVenda(today);
+    }
 }

@@ -25,6 +25,10 @@ public class VendasController {
     public List<Vendas> listarTodos() {
         return vendasService.listarTodos();
     }
+    @GetMapping("/dia")
+    public List<Vendas> listarVendasDoDia() {
+        return vendasService.listarVendasDoDia();
+    }
     @PostMapping
     public ResponseEntity<Vendas> criarVenda(@RequestBody Vendas vendas) {
         Vendas novaVenda = vendasService.salvar(vendas);

@@ -14,7 +14,11 @@ import java.time.LocalDateTime;
 public class PreferenciaClienteService {
 
     private final PreferenciaClienteRepository preferenciaClienteRepository;
-
+    
+    public Optional<PreferenciaCliente> buscarPorClienteId(Long clienteId) {
+        return preferenciaClienteRepository.findByClienteId(clienteId);
+    }
+    
     @Autowired
     public PreferenciaClienteService(PreferenciaClienteRepository preferenciaClienteRepository) {
         this.preferenciaClienteRepository = preferenciaClienteRepository;

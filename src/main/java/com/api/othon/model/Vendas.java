@@ -20,8 +20,8 @@ public class Vendas implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "inventario_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "inventario_id", nullable = true)
     private Inventario inventario;
 
     @Column(name = "quantidade", nullable = false)
@@ -31,15 +31,24 @@ public class Vendas implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataVenda;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "profissional_id", nullable = false)
     private Profissional profissional;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "filial_id", nullable = false)
+    private Filial filial;
+
+    @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
+    @PrePersist
+    protected void onCreate() {
+        dataVenda = new Date();
+    }
+
 
 }

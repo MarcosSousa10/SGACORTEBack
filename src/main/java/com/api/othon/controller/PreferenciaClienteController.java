@@ -30,7 +30,12 @@ public class PreferenciaClienteController {
         Optional<PreferenciaCliente> preferencia = preferenciaClienteService.buscarPorId(id);
         return preferencia.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<PreferenciaCliente> buscarPorClienteId(@PathVariable Long clienteId) {
+        Optional<PreferenciaCliente> preferencia = preferenciaClienteService.buscarPorClienteId(clienteId);
+        return preferencia.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
     @PostMapping
     public PreferenciaCliente criar(@RequestBody PreferenciaCliente preferenciaCliente) {
         return preferenciaClienteService.salvar(preferenciaCliente);
