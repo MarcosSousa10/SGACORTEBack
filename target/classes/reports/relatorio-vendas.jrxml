@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio-vendas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36422d38-6622-4d78-a774-6fa636883dba">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="dHJhbnNhY29lcyAsMTUsMTUsYjYwODk1ZjAtYmRjMS00MTg5LWIzZjctNTNhNDRmMmFiOWY4Ow=="/>
+	<parameter name="DataTransacao" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM transacoes
+WHERE 
+	  ( 
+	 $P{DataTransacao} IS NULL  
+	 OR DATE(transacoes.data_transacao) = DATE($P{DataTransacao}))]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.label" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="data_transacao" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data_transacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_transacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="metodo_pagamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="metodo_pagamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="metodo_pagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="updated_at" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="updated_at"/>
+		<property name="com.jaspersoft.studio.field.label" value="updated_at"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="valor_pago" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="valor_pago"/>
+		<property name="com.jaspersoft.studio.field.label" value="valor_pago"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="agendamento_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="agendamento_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="agendamento_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="filial_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="filial_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="filial_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<field name="inventario_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="inventario_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="inventario_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacoes"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="300" height="30" uuid="9eba5e44-384e-40be-947b-aa230956b95e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[Relatorio De Transações]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="-1" width="100" height="30" uuid="c3ca4642-d136-41ed-966b-babb71d7f3c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Data Da Transação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="30" uuid="04e567c0-2fad-41af-81d7-2c76c82fdda8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a82043cf-5dad-497b-b2d3-86d1941d6f17"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Metodo De Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="30" uuid="aa7b051d-35d3-4795-8b68-9e72ac66f057">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="df95ffcc-b1f9-43e3-877e-ea0a9a40852b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Valor Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="1" width="100" height="30" uuid="dd741a4e-ea10-4b6c-8580-ed5745b8bdaf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd164196-e8a3-4ea0-a499-bcd60e9a974f"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Data e Hora de Criação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="-1" width="100" height="31" uuid="88bdb9bd-5004-4765-a74b-729a6bcadd89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_transacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="a0832fd6-8e9d-40b5-9366-aef2415b596e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a82043cf-5dad-497b-b2d3-86d1941d6f17"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{metodo_pagamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="30" uuid="73acfb50-3640-4ca7-a0ae-a682ea70d084">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="df95ffcc-b1f9-43e3-877e-ea0a9a40852b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="-1" width="100" height="30" uuid="61b340ec-86dc-4f5c-bf31-df52b48ff964">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd164196-e8a3-4ea0-a499-bcd60e9a974f"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{created_at}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

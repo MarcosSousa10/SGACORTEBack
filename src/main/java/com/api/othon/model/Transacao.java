@@ -52,6 +52,7 @@ public class Transacao implements Serializable {
     // Método para definir a data de criação automaticamente antes de persistir
     @PrePersist
     protected void onCreate() {
+        validateAgendamentoOuInventario();
         createdAt = new Date();
         dataTransacao = new Date();
     }
@@ -59,7 +60,15 @@ public class Transacao implements Serializable {
     // Método para definir a data de atualização automaticamente antes de atualizar
     @PreUpdate
     protected void onUpdate() {
+        validateAgendamentoOuInventario();
         updatedAt = new Date();
+    }
+
+    // Validação personalizada para garantir que um dos campos seja preenchido
+    private void validateAgendamentoOuInventario() {
+        if (agendamento == null && inventario == null) {
+            throw new IllegalStateException("Ou o agendamento ou o inventario deve ser fornecido.");
+        }
     }
 
     public enum MetodoPagamento {

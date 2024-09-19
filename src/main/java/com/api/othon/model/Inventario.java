@@ -30,8 +30,9 @@ public class Inventario implements Serializable {
     @Column(name = "preco", precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
 
-    @Column(nullable = false, length = 100)
-    private String fornecedor;
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id", nullable = false) 
+    private Fornecedor fornecedor;
 
     @ManyToOne
     @JoinColumn(name = "filial_id", nullable = false)
@@ -45,13 +46,11 @@ public class Inventario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    // Método para definir a data de criação automaticamente antes de persistir
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
     }
 
-    // Método para definir a data de atualização automaticamente antes de atualizar
     @PreUpdate
     protected void onUpdate() {
         updatedAt = new Date();
