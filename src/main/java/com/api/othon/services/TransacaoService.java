@@ -37,7 +37,7 @@ public class TransacaoService {
                 .orElseThrow(() -> new RuntimeException("Transação não encontrada"));
 
         transacaoExistente.setAgendamento(transacaoAtualizada.getAgendamento());
-        transacaoExistente.setInventario(transacaoAtualizada.getInventario());
+        transacaoExistente.setInventarios(transacaoAtualizada.getInventarios());
         transacaoExistente.setMetodoPagamento(transacaoAtualizada.getMetodoPagamento());
         transacaoExistente.setValorPago(transacaoAtualizada.getValorPago());
         transacaoExistente.setDataTransacao(transacaoAtualizada.getDataTransacao());

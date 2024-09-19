@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,9 +23,14 @@ public class Transacao implements Serializable {
     @JoinColumn(name = "agendamento_id", nullable = true)
     private Agendamento agendamento;
 
-    @ManyToOne
-    @JoinColumn(name = "inventario_id", nullable = true)
-    private Inventario inventario;
+    // Alteramos o relacionamento para ManyToMany
+    @ManyToMany
+    @JoinTable(
+        name = "transacao_inventario", // Tabela de junção
+        joinColumns = @JoinColumn(name = "transacao_id"),
+        inverseJoinColumns = @JoinColumn(name = "inventario_id")
+    )
+    private List<Inventario> inventarios; 
 
     @Enumerated(EnumType.STRING)
     @Column(name = "metodo_pagamento", nullable = false)
@@ -66,7 +72,7 @@ public class Transacao implements Serializable {
 
     // Validação personalizada para garantir que um dos campos seja preenchido
     private void validateAgendamentoOuInventario() {
-        if (agendamento == null && inventario == null) {
+        if (agendamento == null && (inventarios == null || inventarios.isEmpty())) {
             throw new IllegalStateException("Ou o agendamento ou o inventario deve ser fornecido.");
         }
     }

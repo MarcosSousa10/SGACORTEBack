@@ -38,6 +38,10 @@ public class Vendas implements Serializable {
     @ManyToOne
     @JoinColumn(name = "filial_id", nullable = false)
     private Filial filial;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "metodo_pagamento", nullable = false)
+    private MetodoPagamento metodoPagamento;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
@@ -45,10 +49,14 @@ public class Vendas implements Serializable {
 
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
+
     @PrePersist
     protected void onCreate() {
         dataVenda = new Date();
     }
 
+    public enum MetodoPagamento {
+        DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, PAGAMENTO_ONLINE
+    }
 
 }
