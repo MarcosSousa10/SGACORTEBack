@@ -7,25 +7,26 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "vendas")
 public class Vendas implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "inventario_id", nullable = true)
-    private Inventario inventario;
+    private List<Inventario> inventario;
 
+    @ElementCollection
     @Column(name = "quantidade", nullable = false)
-    private Integer quantidade;
+    private List<Integer> quantidade;
 
     @Column(name = "data_venda", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -38,7 +39,7 @@ public class Vendas implements Serializable {
     @ManyToOne
     @JoinColumn(name = "filial_id", nullable = false)
     private Filial filial;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "metodo_pagamento", nullable = false)
     private MetodoPagamento metodoPagamento;
@@ -58,5 +59,4 @@ public class Vendas implements Serializable {
     public enum MetodoPagamento {
         DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, PAGAMENTO_ONLINE
     }
-
 }
