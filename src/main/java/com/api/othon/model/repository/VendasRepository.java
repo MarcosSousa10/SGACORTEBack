@@ -12,13 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VendasRepository extends JpaRepository<Vendas, Long> {
-    @Query("SELECT new com.api.othon.model.VendaDTO(v.id, v.dataVenda, v.valorTotal, vi.id, vi.quantidade, v.metodoPagamento, c, p, f) " +
+    @Query("SELECT new com.api.othon.model.VendaDTO(v.id, v.dataVenda, v.valorTotal, vi.inventario.id, vi.quantidade, v.metodoPagamento, c, p, f) " +
     "FROM Vendas v " +
     "LEFT JOIN v.vendaItems vi " +
     "LEFT JOIN v.cliente c " +
     "LEFT JOIN v.profissional p " +
     "LEFT JOIN v.filial f")
 List<VendaDTO> findAllWithItens();
+
 @Query("SELECT new com.api.othon.model.VendaDTO(v.id, v.dataVenda, v.valorTotal, vi.id, vi.quantidade, v.metodoPagamento, c, p, f) " + 
     "FROM Vendas v " +
     "LEFT JOIN v.vendaItems vi " +
