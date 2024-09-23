@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,14 +21,9 @@ public class Vendas implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "inventario_id", nullable = true)
-    private List<Inventario> inventario;
-
-    @ElementCollection
-    @Column(name = "quantidade", nullable = false)
-    private List<Integer> quantidade;
-
+    @OneToMany(mappedBy = "venda", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<VendaItem> vendaItems;
+    
     @Column(name = "data_venda", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataVenda;

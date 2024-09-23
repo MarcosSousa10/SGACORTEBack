@@ -1,5 +1,6 @@
 package com.api.othon.services;
 
+import com.api.othon.model.VendaDTO;
 import com.api.othon.model.Vendas;
 import com.api.othon.model.repository.VendasRepository;
 
@@ -24,8 +25,8 @@ public class VendasService {
         return vendasRepository.save(vendas);
     }
 
-    public Optional<Vendas> buscarPorId(Long id) {
-        return vendasRepository.findById(id);
+    public Optional<VendaDTO> buscarPorId(Long id) {
+        return vendasRepository.findAllWithItensById(id);
     }
 
     public void deletar(Long id) {
@@ -41,12 +42,17 @@ public class VendasService {
         }
     }
 
-    public List<Vendas> listarTodos() {
+    public List<Vendas> listarTodoss() {
         return vendasRepository.findAll();
     }
 
     public List<Vendas> listarVendasDoDia() {
         LocalDate today = LocalDate.now();
         return vendasRepository.findVendasByDataVenda(today);
+    }
+
+
+    public List<VendaDTO> listarTodos() {
+        return vendasRepository.findAllWithItens();
     }
 }

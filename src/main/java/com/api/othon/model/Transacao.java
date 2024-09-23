@@ -55,7 +55,6 @@ public class Transacao implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    // Método para definir a data de criação automaticamente antes de persistir
     @PrePersist
     protected void onCreate() {
         validateAgendamentoOuInventario();
