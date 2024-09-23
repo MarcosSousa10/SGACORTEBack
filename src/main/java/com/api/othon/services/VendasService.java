@@ -1,5 +1,6 @@
 package com.api.othon.services;
 
+import com.api.othon.controller.DTO.VendaItemDTO;
 import com.api.othon.model.VendaDTO;
 import com.api.othon.model.Vendas;
 import com.api.othon.model.repository.VendasRepository;
@@ -8,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -55,4 +59,22 @@ public class VendasService {
     public List<VendaDTO> listarTodos() {
         return vendasRepository.findAllWithItens();
     }
+    public List<VendaDTO> findAllWithItens() {
+        List<VendaDTO> vendaList = vendasRepository.findAllWithItens();
+        Map<Long, VendaDTO> vendaMap = new HashMap<>();
+
+        for (VendaDTO venda : vendaList) {
+            if (!vendaMap.containsKey(venda.getVendaId())) {
+                // Adiciona a venda ao mapa
+                vendaMap.put(venda.getVendaId(), venda);
+            } else {
+                // Agrupa os itens
+                VendaDTO existingVenda = vendaMap.get(venda.getVendaId());
+                existingVenda.getItens().add(new VendaItemDTO(venda.getVendaItemId(), venda.getVendaItemQuantidade()));
+            }
+        }
+
+        return new ArrayList<>(vendaMap.values());
+    }
+    
 }

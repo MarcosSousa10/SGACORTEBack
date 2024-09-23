@@ -31,7 +31,7 @@ public class VendasController {
     }
     @GetMapping
     public ResponseEntity<List<VendaDTO>> listarTodos() {
-        List<VendaDTO> vendas = vendasService.listarTodos();
+        List<VendaDTO> vendas = vendasService.findAllWithItens();
         return ResponseEntity.ok(vendas);
     }
     
