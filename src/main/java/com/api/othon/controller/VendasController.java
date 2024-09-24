@@ -26,8 +26,8 @@ public class VendasController {
         this.vendasService = vendasService;
     }
   @GetMapping("/dia")
-    public List<Vendas> listarVendasDoDia() {
-        return vendasService.listarVendasDoDia();
+    public List<VendaDTO> listarVendasDoDia() {
+        return vendasService.findAllWithItensFromToday();
     }
     @GetMapping
     public ResponseEntity<List<VendaDTO>> listarTodos() {

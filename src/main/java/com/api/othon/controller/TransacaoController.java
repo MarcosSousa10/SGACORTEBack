@@ -8,6 +8,7 @@ import com.api.othon.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Date;
@@ -33,21 +34,26 @@ public class TransacaoController {
         return transacaoService.listarTodas();
     }
 
-	@GetMapping("/relatorio-vendas")
-	public ResponseEntity<byte[]> relatorioVendas(
-			@RequestParam(value = "inicio", required= false, defaultValue = "") String inicio
-            
-	){
-		Date dataInicio = DateUtils.fromString(inicio);
-	
-		var relatorioGerado = relatorioVendasService.gerarRelatorio(dataInicio);
-		var headers = new HttpHeaders();
-		var fileName = "relatorio-vendas.pdf";
-		headers.setContentDispositionFormData("inline; filename=\"" +fileName+ "\"", fileName);
-		headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-		var responseEntity = new ResponseEntity<>(relatorioGerado, headers, HttpStatus.OK);
-		return responseEntity;
-	}
+    @GetMapping("/relatorio-vendas")
+    public ResponseEntity<byte[]> relatorioVendas(
+            @RequestParam(value = "inicio", required= false, defaultValue = "") String inicio
+    ) {
+        Date dataInicio = DateUtils.fromString(inicio);
+        byte[] relatorioGerado = relatorioVendasService.gerarRelatorio(dataInicio); // Relatório em bytes
+    
+        HttpHeaders headers = new HttpHeaders();
+        String fileName = "relatorio-vendas.pdf";
+    
+        // Define o tipo de conteúdo como PDF
+        headers.setContentType(MediaType.APPLICATION_PDF);
+    
+        // Define o cabeçalho de disposição do conteúdo
+        headers.setContentDispositionFormData("inline", fileName); // Modo inline
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+    
+        return new ResponseEntity<>(relatorioGerado, headers, HttpStatus.OK);
+    }
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<Transacao> buscarPorId(@PathVariable Long id) {

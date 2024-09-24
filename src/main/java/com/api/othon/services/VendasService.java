@@ -76,5 +76,31 @@ public class VendasService {
 
         return new ArrayList<>(vendaMap.values());
     }
+    public List<VendaDTO> findAllWithItensFromToday() {
+        List<VendaDTO> vendaList = vendasRepository.findAllWithItens();
+        Map<Long, VendaDTO> vendaMap = new HashMap<>();
+        
+        // Obtém a data de hoje
+        LocalDate today = LocalDate.now();
+    
+        for (VendaDTO venda : vendaList) {
+            // Converte a data da venda para LocalDate
+            LocalDate dataVenda = venda.getDataVenda().toLocalDate(); // Assumindo que 'getDataVenda()' retorna um objeto do tipo LocalDateTime
+    
+            // Verifica se a data da venda é a de hoje
+            if (dataVenda.equals(today)) {
+                if (!vendaMap.containsKey(venda.getVendaId())) {
+                    // Adiciona a venda ao mapa
+                    vendaMap.put(venda.getVendaId(), venda);
+                } else {
+                    // Agrupa os itens
+                    VendaDTO existingVenda = vendaMap.get(venda.getVendaId());
+                    existingVenda.getItens().add(new VendaItemDTO(venda.getVendaItemId(), venda.getVendaItemQuantidade()));
+                }
+            }
+        }
+    
+        return new ArrayList<>(vendaMap.values());
+    }
     
 }
