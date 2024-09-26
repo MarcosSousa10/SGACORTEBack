@@ -1,4 +1,4 @@
-package com.api.othon.controller.Email;
+package com.api.othon.controller.email;
 
 public class EmailRequest {
     private String to;

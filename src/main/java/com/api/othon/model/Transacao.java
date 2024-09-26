@@ -71,9 +71,9 @@ public class Transacao implements Serializable {
 
     // Validação personalizada para garantir que um dos campos seja preenchido
     private void validateAgendamentoOuInventario() {
-        if (agendamento == null && (inventarios == null || inventarios.isEmpty())) {
-            throw new IllegalStateException("Ou o agendamento ou o inventario deve ser fornecido.");
-        }
+      //  if (agendamento == null && (inventarios == null || inventarios.isEmpty())) {
+        //    throw new IllegalStateException("Ou o agendamento ou o inventario deve ser fornecido.");
+       // }
     }
 
     public enum MetodoPagamento {
