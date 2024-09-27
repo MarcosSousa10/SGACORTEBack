@@ -48,13 +48,17 @@ public class Profissional implements Serializable {
     @JoinColumn(name = "filial_id", nullable = false)
     private Filial filial;
 
-    // Método que define a data de criação automaticamente antes de persistir
+  @OneToOne(cascade = CascadeType.ALL) // Use CascadeType.ALL para salvar/atualizar a imagem ao salvar o profissional
+    @JoinColumn(name = "imagem_id", referencedColumnName = "id")
+    private Image imagem;
+
+    // Definir a data de criação antes de persistir
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
     }
 
-    // Método que define a data de atualização automaticamente antes de atualizar
+    // Definir a data de atualização antes de atualizar
     @PreUpdate
     protected void onUpdate() {
         updatedAt = new Date();

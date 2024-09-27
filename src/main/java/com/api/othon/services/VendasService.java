@@ -1,6 +1,6 @@
 package com.api.othon.services;
 
-import com.api.othon.controller.DTO.VendaItemDTO;
+import com.api.othon.controller.dto.VendaItemDTO;
 import com.api.othon.model.VendaDTO;
 import com.api.othon.model.Vendas;
 import com.api.othon.model.repository.VendasRepository;

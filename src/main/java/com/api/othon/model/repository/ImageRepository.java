@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.api.othon.model.Image;
 
 public interface ImageRepository extends JpaRepository<Image, Long> {
+    Image findByProfissionalId(Long profissionalId); 
 
 }

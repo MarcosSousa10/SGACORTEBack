@@ -33,7 +33,9 @@ public class Servico implements Serializable {
     @ManyToOne
     @JoinColumn(name = "filial_id", nullable = false)
     private Filial filial;
-
+    @OneToOne(cascade = CascadeType.ALL) // Use CascadeType.ALL para salvar/atualizar a imagem ao salvar o profissional
+    @JoinColumn(name = "imagem_id", referencedColumnName = "id")
+    private imagemService imagem;
     @Column(name = "created_at", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

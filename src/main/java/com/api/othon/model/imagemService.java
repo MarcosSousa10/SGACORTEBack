@@ -7,28 +7,30 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "image")
-public class Image {
+@Table(name = "imageService")
+public class imagemService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob
-    @Column // Remover o length aqui
+    @Column 
     private byte[] data;
     @ManyToOne
-    @JoinColumn(name = "profissional_id", nullable = true)
-    private Profissional profissional;
+    @JoinColumn(name = "servico_id", nullable = true)
+    private Servico servico;
 
-    public Image() {
+    public imagemService() {
     }
 
-    public Image(Long id, byte[] data, Profissional profissional) {
+
+    public imagemService(Long id, byte[] data, Servico servico) {
         this.id = id;
         this.data = data;
-        this.profissional = profissional;
+        this.servico = servico;
     }
+
 
     @Override
     public String toString() {

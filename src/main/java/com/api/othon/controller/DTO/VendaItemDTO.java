@@ -1,4 +1,4 @@
-package com.api.othon.controller.DTO;
+package com.api.othon.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;
