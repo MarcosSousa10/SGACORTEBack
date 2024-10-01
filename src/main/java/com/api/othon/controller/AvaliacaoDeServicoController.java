@@ -1,5 +1,6 @@
 package com.api.othon.controller;
 
+import com.api.othon.controller.dto.AvaliacaoDTO;
 import com.api.othon.model.AvaliacaoDeServico;
 import com.api.othon.model.CampanhaDeMarketing;
 import com.api.othon.services.AvaliacaoDeServicoService;
@@ -23,10 +24,15 @@ public class AvaliacaoDeServicoController {
         AvaliacaoDeServico savedAvaliacao = service.save(avaliacao);
         return ResponseEntity.ok(savedAvaliacao);
     }
-    @GetMapping
-    public List<AvaliacaoDeServico> listarTodos() {
-        return service.listarTodos();
+    @GetMapping("/testge")
+    public List<AvaliacaoDeServico> listarTodosq() {
+        return service.listarTodos1();
     }
+    @GetMapping
+    public List<AvaliacaoDTO> listarTodos() {
+        return service.listarTodasAvaliacoes();
+    }
+    
     @GetMapping("/{id}")
     public ResponseEntity<AvaliacaoDeServico> getById(@PathVariable Long id) {
         Optional<AvaliacaoDeServico> avaliacao = service.findById(id);

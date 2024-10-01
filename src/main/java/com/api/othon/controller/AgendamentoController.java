@@ -1,5 +1,6 @@
 package com.api.othon.controller;
 
+import com.api.othon.controller.dto.AgendamentoDTO;
 import com.api.othon.model.Agendamento;
 import com.api.othon.model.Agendamento.Status;
 import com.api.othon.services.AgendamentoService;
@@ -31,7 +32,7 @@ public class AgendamentoController {
         return ResponseEntity.ok(agendamentos);
     }
     @GetMapping
-    public List<Agendamento> listarTodos() {
+    public List<AgendamentoDTO> listarTodos() {
         return agendamentoService.listarTodos();
     }
     @GetMapping("/agendamentos/agendados")
